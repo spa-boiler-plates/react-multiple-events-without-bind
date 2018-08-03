@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <title>React Multiple Events: With Bind </title>
+    <script crossorigin src="https://unpkg.com/react@16/umd/react.development.js"></script>
+    <script crossorigin src="https://unpkg.com/react-dom@16/umd/react-dom.development.js"></script>
+    <script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
+    <script type="text/babel">
+        class SimpleForm extends React.Component {
+            constructor(props) {
+                super(props);
+
+                this.state = {
+                    fname: '',
+                    lname: '',
+                };
+            }
+
+            onInputChange(fieldKey, e) {
+                this.setState({
+                    [fieldKey]: e.target.value,
+                })
+            }
+
+            render() {
+                return (
+                    <React.Fragment>
+                        <label>First Name:<input type="text" value={this.state.fname} name="fname" onChange={this.onInputChange.bind(this, 'fname')} /></label>
+                        <label>Last Name:<input type="text" value={this.state.lname} name="lname" onChange={this.onInputChange.bind(this, 'lname')} /></label>
+                        <button>Submit</button>
+                        <div>Welcome {this.state.fname} {this.state.lname} !</div>
+                    </React.Fragment>
+                );
+            }
+        }
+
+        ReactDOM.render(
+            <SimpleForm />,
+            document.getElementById('root')
+        );
+    </script>
+</head>
+<body>
+<div id="root"></div>
+</body>
+</html>
